@@ -11,13 +11,14 @@
  * @param {number} height 
  */
 
- function render(frequencyArray, ctx, count, width, height) {
-	// Get the number of values in the data array
+function render(frequencyArray, ctx, count, width, height) {
+  // Get the number of values in the data array
 	const bars = frequencyArray.length
 	// Divide the canvas by the number of bars. 
 	const step = width / bars
 	const lineWidth = (width / count) - 2
 	const int = Math.floor(frequencyArray.length / count)
+
 
 	// Start a new path
 	ctx.beginPath()
@@ -48,11 +49,11 @@
 			// Starting x value
 			const x1 = step * i
 			// Starting y (bottom of the canvas)
-			const y1 = height
+			const y1 = 0
 			// Ending x 
 			const x2 = x1 
 			// Ending y value
-			const y2 = height - barLength
+			const y2 = barLength
 
 			// Draw the line
 			// Move to the starting coordinate
@@ -60,11 +61,45 @@
 			// Draw a line to the end coordinate
 			ctx.lineTo(x2, y2)
 			fsum = 0
+
+			ctx.strokeStyle = '#74C32E'
+			ctx.stroke()
+			ctx.closePath()
+
+			ctx.beginPath()
+			ctx.fillStyle = 'grey'
+			ctx.fillRect(x1 - 6, y2 + 100, 12, 20)
+			ctx.closePath()
+
+			ctx.beginPath()
+			ctx.fillStyle = 'pink'
+			ctx.fillRect(x1 - 1.5, y2 + 90, 3, 10)
+			ctx.closePath()
+
+			ctx.beginPath()
+			ctx.fillStyle = 'red'
+			ctx.fillRect(x1 - 5, y2 + 10, 10, fval)
+			ctx.closePath()
+
+			ctx.beginPath()
+			ctx.fillStyle = '#74C32E'
+			ctx.arc(x1, y2, 10, 0, Math.PI * 2)
+			ctx.fill()
+			ctx.stroke()
+			ctx.closePath()
+
+			ctx.beginPath()
+			ctx.fillStyle = 'black'
+			ctx.arc(x1 - 2, y2 + 5, 2, 0, Math.PI * 2)
+			ctx.fill()
+			ctx.closePath()
+
+			ctx.beginPath()
+			ctx.arc(x1 + 2, y2 + 5, 2, 0, Math.PI * 2)
+			ctx.fill()
+			ctx.closePath()
 		}
 	}
-	
-	ctx.strokeStyle = 'red'
-	ctx.stroke()
 }
 
 export default render

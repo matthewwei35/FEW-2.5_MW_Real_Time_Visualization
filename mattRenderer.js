@@ -1,8 +1,3 @@
-
-// **************************************************************
-// Draw monochrome bars
-// Draws a row of vertical bars 
-
 /**
  * 
  * @param {UINT8 Array} frequencyArray 
@@ -36,8 +31,6 @@ function render(frequencyArray, ctx, count, width, height) {
 	for (let i = 0; i < bars; i += int) {
 		const f = frequencyArray[i]
 		fsum = Math.max(fsum, f)
-
-		// FIXME: This doesn't seem to be drawing quite right so far
 		
 		if (i % int === 0) {
 			const fval = fsum
@@ -62,25 +55,30 @@ function render(frequencyArray, ctx, count, width, height) {
 			ctx.lineTo(x2, y2)
 			fsum = 0
 
+			// Snake Body
 			ctx.strokeStyle = '#74C32E'
 			ctx.stroke()
 			ctx.closePath()
 
+			// Mouse Body
 			ctx.beginPath()
 			ctx.fillStyle = 'grey'
 			ctx.fillRect(x1 - 6, y2 + 100, 12, 20)
 			ctx.closePath()
 
+			// Mouse Tail
 			ctx.beginPath()
 			ctx.fillStyle = 'pink'
 			ctx.fillRect(x1 - 1.5, y2 + 90, 3, 10)
 			ctx.closePath()
 
+			// Snake Tongue
 			ctx.beginPath()
 			ctx.fillStyle = 'red'
 			ctx.fillRect(x1 - 5, y2 + 10, 10, fval)
 			ctx.closePath()
 
+			// Snake Head
 			ctx.beginPath()
 			ctx.fillStyle = '#74C32E'
 			ctx.arc(x1, y2, 10, 0, Math.PI * 2)
@@ -88,6 +86,7 @@ function render(frequencyArray, ctx, count, width, height) {
 			ctx.stroke()
 			ctx.closePath()
 
+			// Snake Eyes
 			ctx.beginPath()
 			ctx.fillStyle = 'black'
 			ctx.arc(x1 - 2, y2 + 5, 2, 0, Math.PI * 2)
